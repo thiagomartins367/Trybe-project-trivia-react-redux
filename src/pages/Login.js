@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GenericButton from '../components/GenericButton';
 import LabelAndInput from '../components/LabelAndInput';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
   constructor() {
@@ -10,6 +11,7 @@ class Login extends Component {
       playerEmail: '',
       playerName: '',
       disabledButton: true,
+      redirectToSettings: false,
     };
   }
 
@@ -29,10 +31,20 @@ class Login extends Component {
     }
   }
 
+  redirectToSettingsBtn = () => {
+    this.setState({ redirect: true });
+  }
+
   render() {
-    const { playerEmail, playerName, disabledButton } = this.state;
+    const {
+      playerEmail,
+      playerName,
+      disabledButton,
+      redirectToSettings,
+    } = this.state;
     return (
       <section>
+        {redirectToSettings && <Redirect to="/settings" />}
         <LabelAndInput
           labelContent="Email do Gravatar"
           inputId="input-player-email"
@@ -57,6 +69,12 @@ class Login extends Component {
           buttonContent="Play"
           buttonDisabled={ disabledButton }
           buttonDataTestid="btn-play"
+        />
+        <GenericButton
+          buttonContent="Settings"
+          buttonDisabled={ false }
+          buttonDataTestid="btn-settings"
+          onClick={ this.redirectToSettingsBtn }
         />
       </section>
     );
