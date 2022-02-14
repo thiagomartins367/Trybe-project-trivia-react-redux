@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class GenericButton extends Component {
   render() {
-    const { typeButton, buttonContent, buttonDisabled, buttonDataTestid } = this.props;
+    const {
+      typeButton = 'text',
+      buttonContent,
+      buttonDisabled,
+      buttonDataTestid,
+    } = this.props;
     return (
       <button
         type={ typeButton }
@@ -14,5 +20,12 @@ class GenericButton extends Component {
     );
   }
 }
+
+GenericButton.propTypes = {
+  typeButton: PropTypes.string,
+  buttonContent: PropTypes.string,
+  buttonDisabled: PropTypes.bool,
+  buttonDataTestid: PropTypes.string,
+}.isRequired;
 
 export default GenericButton;

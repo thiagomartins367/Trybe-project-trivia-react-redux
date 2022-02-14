@@ -2,9 +2,11 @@ const INITIAL_STATE = {
   state: false,
 };
 
-export const testReducer = (state = INITIAL_STATE, action) => {
+const testReducer = (state = INITIAL_STATE) => {
   switch ('a') {
-    default:
-      return state;
+  default:
+    return state;
   }
-}
+};
+
+export default testReducer;
