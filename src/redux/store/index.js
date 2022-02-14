@@ -6,4 +6,8 @@ const store = createStore(
   rootReducer,
 );
 
+if (window.Cypress) {
+  window.store = store;
+}
+
 export default store;

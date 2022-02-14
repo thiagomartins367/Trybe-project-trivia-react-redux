@@ -1,5 +1,12 @@
 const INITIAL_STATE = {
-  state: false,
+  token: '',
+  player: {
+    name: '',
+    assertions: '',
+    score: '',
+    gravatarEmail: '',
+  },
+  players: [],
 };
 
 const testReducer = (state = INITIAL_STATE) => {

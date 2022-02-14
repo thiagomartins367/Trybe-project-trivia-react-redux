@@ -4,8 +4,6 @@ import Login from './pages/Login';
 import './App.css';
 // import logo from './trivia.png';
 
-
-
 export default function App() {
   return (
     <main>

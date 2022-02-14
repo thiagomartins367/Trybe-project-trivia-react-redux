@@ -10,7 +10,7 @@ class Login extends Component {
       playerEmail: '',
       playerName: '',
       disabledButton: true,
-    }
+    };
   }
 
   handleInput = ({ target }) => {
@@ -54,7 +54,6 @@ class Login extends Component {
         />
         <br />
         <GenericButton
-          typeButton="button"
           buttonContent="Play"
           buttonDisabled={ disabledButton }
           buttonDataTestid="btn-play"
