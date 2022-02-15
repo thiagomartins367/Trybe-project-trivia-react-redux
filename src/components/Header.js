@@ -12,7 +12,7 @@ class Header extends React.Component {
     };
   }
 
-  generateImage () {
+  generateImage() {
     const { playerEmail } = this.props;
     const HASH = md5(playerEmail).toString();
     this.setState({ hashState: HASH });
@@ -25,8 +25,8 @@ class Header extends React.Component {
       <header>
         <img
           data-testid="header-profile-picture"
-          src={ `https://www.gravatar.com/avatar/${hashState}`}
-          alt="Profile picture"
+          src={ `https://www.gravatar.com/avatar/${hashState}` }
+          alt={ playerName }
         />
         <h3 data-testid="header-player-name">{ playerName }</h3>
         <h4 data-testid="header-score">{ score }</h4>
@@ -40,7 +40,7 @@ const mapStateToProps = (state) => ({
   playerEmail: state.player.gravatarEmail,
 });
 
-Header.PropTypes = {
+Header.propTypes = {
   playerName: PropTypes.string,
   playerEmail: PropTypes.string,
 }.isRequired;
