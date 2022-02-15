@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import GenericButton from '../components/GenericButton';
 import LabelAndInput from '../components/LabelAndInput';
+import { fetchApi } from '../redux/actions';
 
 class Login extends Component {
   constructor() {
@@ -31,6 +34,7 @@ class Login extends Component {
 
   render() {
     const { playerEmail, playerName, disabledButton } = this.state;
+    const { fetchAPIRedux } = this.props;
     return (
       <section>
         <LabelAndInput
@@ -57,10 +61,19 @@ class Login extends Component {
           buttonContent="Play"
           buttonDisabled={ disabledButton }
           buttonDataTestid="btn-play"
+          onClickEvent={ () => fetchAPIRedux() }
         />
       </section>
     );
   }
 }
 
-export default Login;
+Login.propTypes = {
+  fetchAPIRedux: PropTypes.func,
+}.isRequired;
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchAPIRedux: () => dispatch(fetchApi()),
+});
+
+export default connect(null, mapDispatchToProps)(Login);

@@ -1,5 +1,4 @@
 const INITIAL_STATE = {
-  token: '',
   player: {
     name: '',
     assertions: '',
