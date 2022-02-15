@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GenericButton from '../components/GenericButton';
@@ -13,6 +14,7 @@ class Login extends Component {
       playerEmail: '',
       playerName: '',
       disabledButton: true,
+      redirectToSettings: false,
     };
   }
 
@@ -32,11 +34,21 @@ class Login extends Component {
     }
   }
 
+  redirectToSettingsBtn = () => {
+    this.setState({ redirectToSettings: true });
+  }
+
   render() {
-    const { playerEmail, playerName, disabledButton } = this.state;
+    const {
+      playerEmail,
+      playerName,
+      disabledButton,
+      redirectToSettings,
+    } = this.state;
     const { fetchAPIRedux } = this.props;
     return (
       <section>
+        {redirectToSettings && <Redirect to="/settings" />}
         <LabelAndInput
           labelContent="Email do Gravatar"
           inputId="input-player-email"
@@ -62,6 +74,12 @@ class Login extends Component {
           buttonDisabled={ disabledButton }
           buttonDataTestid="btn-play"
           onClickEvent={ () => fetchAPIRedux() }
+        />
+        <GenericButton
+          buttonContent="Settings"
+          buttonDisabled={ false }
+          buttonDataTestid="btn-settings"
+          onClick={ this.redirectToSettingsBtn }
         />
       </section>
     );

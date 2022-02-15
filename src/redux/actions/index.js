@@ -1,4 +1,11 @@
+export const PLAYER_REDUCER = 'PLAYER_REDUCER';
 export const GET_TOKEN = 'GET_TOKEN';
+
+export const playerReducer = (player) => ({
+  type: PLAYER_REDUCER,
+  token,
+  player,
+});
 
 export const fetchApi = () => (dispatch) => {
   const URL = 'https://opentdb.com/api_token.php?command=request';
