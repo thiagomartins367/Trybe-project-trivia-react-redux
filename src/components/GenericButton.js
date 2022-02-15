@@ -7,12 +7,14 @@ class GenericButton extends Component {
       buttonContent,
       buttonDisabled,
       buttonDataTestid,
+      onClickEvent,
     } = this.props;
     return (
       <button
         type="button"
         disabled={ buttonDisabled }
         data-testid={ buttonDataTestid }
+        onClick={ onClickEvent }
       >
         { buttonContent }
       </button>

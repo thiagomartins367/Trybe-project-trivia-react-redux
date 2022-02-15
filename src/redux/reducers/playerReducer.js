@@ -1,7 +1,6 @@
 import { PLAYER_REDUCER } from '../actions';
 
 const INITIAL_STATE = {
-  token: '',
   player: {
     name: '',
     assertions: '',
@@ -16,7 +15,6 @@ const playerReducer = (state = INITIAL_STATE, action) => {
   case PLAYER_REDUCER:
     return {
       ...state,
-      token: action.token,
       player: action.player,
       players: action.players,
     };
