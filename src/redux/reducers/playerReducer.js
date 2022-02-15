@@ -19,7 +19,7 @@ const playerReducer = (state = INITIAL_STATE, action) => {
       token: action.token,
       player: action.player,
       players: action.players,
-    }
+    };
   default:
     return state;
   }
