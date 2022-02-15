@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GenericButton from '../components/GenericButton';
 import LabelAndInput from '../components/LabelAndInput';
 import { fetchApi } from '../redux/actions';
+import Settings from './Settings';
 
 class Login extends Component {
   constructor() {
@@ -48,6 +49,9 @@ class Login extends Component {
     const { fetchAPIRedux } = this.props;
     return (
       <section>
+        <BrowserRouter>
+          <Route path="/settings" component={ Settings } />
+        </BrowserRouter>
         {redirectToSettings && <Redirect to="/settings" />}
         <LabelAndInput
           labelContent="Email do Gravatar"
@@ -79,7 +83,7 @@ class Login extends Component {
           buttonContent="Settings"
           buttonDisabled={ false }
           buttonDataTestid="btn-settings"
-          onClick={ this.redirectToSettingsBtn }
+          onClickEvent={ this.redirectToSettingsBtn }
         />
       </section>
     );
