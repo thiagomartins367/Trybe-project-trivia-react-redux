@@ -10,8 +10,8 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route path="/" component={ Login } />
           <Route path="/settings" component={ Settings } />
+          <Route exact path="/" component={ Login } />
         </Switch>
       </BrowserRouter>
       <header className="App-header">

@@ -3,7 +3,6 @@ export const GET_TOKEN = 'GET_TOKEN';
 
 export const playerReducer = (player) => ({
   type: PLAYER_REDUCER,
-  token,
   player,
 });
 
