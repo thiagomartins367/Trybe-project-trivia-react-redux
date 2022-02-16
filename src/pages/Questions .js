@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import QuestionCard from '../components/QuestionCard';
 import { fetchApiOfQuestions } from '../redux/actions';
@@ -52,5 +53,15 @@ const mapStateToProps = (stateRedux) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchApiOfQuestionsRedux: (token) => dispatch(fetchApiOfQuestions(token)),
 });
+
+Questions.propTypes = {
+  fetchApiOfQuestionsRedux: PropTypes.func.isRequired,
+  tokenAPi: PropTypes.string,
+  questionsRedux: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+Questions.defaultProps = {
+  tokenAPi: '',
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Questions);

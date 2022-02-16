@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class QuestionCard extends Component {
   render() {
@@ -63,5 +64,14 @@ class QuestionCard extends Component {
     );
   }
 }
+
+QuestionCard.propTypes = {
+  category: PropTypes.string,
+  questionContent: PropTypes.string,
+  correctAnswer: PropTypes.string,
+  incorrectAnswers: PropTypes.arrayOf(PropTypes.string),
+  dataTestidCategory: PropTypes.string,
+  dataTestidQuestion: PropTypes.string,
+}.isRequired;
 
 export default QuestionCard;
