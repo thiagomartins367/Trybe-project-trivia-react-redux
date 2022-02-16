@@ -10,7 +10,7 @@ class Questions extends Component {
 
     this.state = {
       currentQuestion: [1],
-    }
+    };
   }
 
   componentDidMount() {
@@ -20,7 +20,7 @@ class Questions extends Component {
 
   render() {
     const { currentQuestion } = this.state;
-    const { questionsRedux } = this.props; //correct_answer //incorrect_answer
+    const { questionsRedux } = this.props;
     return (
       <section>
         <h1>Tela de Jogo</h1>

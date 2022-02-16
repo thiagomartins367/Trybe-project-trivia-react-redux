@@ -10,12 +10,15 @@ class QuestionCard extends Component {
       dataTestidCategory,
       dataTestidQuestion,
     } = this.props;
+    const RANDOM_LOGIC_NUMBER = 0.5;
     const questionsList = [...incorrectAnswers, correctAnswer];
     const indexsQuestionsList = [];
     questionsList.forEach((element, index) => {
       indexsQuestionsList.push(index);
     });
-    const randomIndexs = indexsQuestionsList.sort(() => Math.random() - 0.5);
+    const randomIndexs = indexsQuestionsList.sort(
+      () => Math.random() - RANDOM_LOGIC_NUMBER,
+    );
     // console.log('randomIndexs: ', randomIndexs);
     const randomQuestions = [];
     randomIndexs.forEach((elementIndex) => {
@@ -39,7 +42,7 @@ class QuestionCard extends Component {
           {
             randomQuestions.map((element, index) => (
               <button
-                key={element}
+                key={ element }
                 type="button"
                 className="answer"
                 data-testid={

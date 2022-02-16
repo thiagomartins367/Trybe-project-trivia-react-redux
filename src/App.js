@@ -8,22 +8,18 @@ import Questions from './pages/Questions ';
 
 export default function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route path="/settings" component={ Settings } />
-          <Route path="/questions" component={ Questions } />
-          <Route exact path="/">
-            <Login />
-            <header className="App-header">
-              <img src={ logo } className="App-logo" alt="logo" />
-              <p>
-                SUA VEZ
-              </p>
-            </header>
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/settings" component={ Settings } />
+        <Route path="/questions" component={ Questions } />
+        <Route exact path="/">
+          <Login />
+          <header className="App-header">
+            <img src={ logo } className="App-logo" alt="logo" />
+            <p>SUA VEZ</p>
+          </header>
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }

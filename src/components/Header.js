@@ -8,25 +8,19 @@ class Header extends React.Component {
     super();
     this.state = {
       score: 0,
-      hashState: '',
     };
   }
 
-  componentDidMount() {
-    const { playerEmail } = this.props;
-    // console.log('playerEmail: ', playerEmail);
-    const HASH = md5(playerEmail).toString();
-    this.setState({ hashState: HASH });
-  }
-
   render() {
-    const { playerName } = this.props;
-    const { score, hashState } = this.state;
+    const { playerName, playerEmail } = this.props;
+    const { score } = this.state;
+    // console.log('playerEmail: ', playerEmail);
+    const hashEmail = md5(playerEmail).toString();
     return (
       <header>
         <img
           data-testid="header-profile-picture"
-          src={ `https://www.gravatar.com/avatar/${hashState}` }
+          src={ `https://www.gravatar.com/avatar/${hashEmail}` }
           alt={ playerName }
         />
         <h3 data-testid="header-player-name">{ playerName }</h3>
@@ -42,7 +36,7 @@ const mapStateToProps = (state) => ({
 });
 
 // const mapDispatchToProps = (dispatch) => ({
- 
+
 // });
 
 Header.propTypes = {

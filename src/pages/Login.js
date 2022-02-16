@@ -86,7 +86,7 @@ class Login extends Component {
             onClickEvent={ () => {
               // fetchAPIRedux();
               playerActionRedux(playerName, playerEmail);
-            }}
+            } }
           />
         </Link>
         <GenericButton
@@ -106,7 +106,9 @@ Login.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchApiTokenRedux: () => dispatch(fetchApiToken()),
-  playerActionRedux: (playerName, playerEmail) => dispatch(playerAction(playerName, playerEmail)),
+  playerActionRedux: (playerName, playerEmail) => dispatch(
+    playerAction(playerName, playerEmail),
+  ),
 });
 
 export default connect(null, mapDispatchToProps)(Login);

@@ -23,16 +23,11 @@ export const fetchApiToken = () => async (dispatch) => {
     const URL = 'https://opentdb.com/api_token.php?command=request';
     const response = await fetch(URL);
     const data = await response.json();
-    // console.log('token: ', data.token);
     dispatch(saveTokenInRedux(data.token));
-    // dispatch(saveTokenInRedux('b0d533aef5922425fb5962cbd3f1c79bd7da7599f949d672d3fbdca1f3bbe741'));
+    // console.log('token: ', data.token);
   } catch (error) {
     console.log('ERROR REQUEST "fetchApiToken" :', error);
   }
-  // return fetch(URL)
-  //   .then((response) => response.json())
-  //   .then((data) => dispatch(saveTokenInRedux(data.token)))
-  //   .catch((error) => console.log('ERROR REQUEST "fetchApiToken" :', error));
 };
 
 export const fetchApiOfQuestions = (token) => async (dispatch) => {
@@ -55,4 +50,4 @@ export const fetchApiOfQuestions = (token) => async (dispatch) => {
   } catch (error) {
     console.log('ERROR REQUEST "fetchApiOfQuestions" :', error);
   }
-}
+};
