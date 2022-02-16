@@ -6,6 +6,7 @@ class GenericButton extends Component {
     const {
       buttonContent,
       buttonDisabled,
+      classNameButton,
       buttonDataTestid,
       onClickEvent,
     } = this.props;
@@ -13,6 +14,7 @@ class GenericButton extends Component {
       <button
         type="button"
         disabled={ buttonDisabled }
+        className={ classNameButton }
         data-testid={ buttonDataTestid }
         onClick={ onClickEvent }
       >
@@ -23,10 +25,15 @@ class GenericButton extends Component {
 }
 
 GenericButton.propTypes = {
-  typeButton: PropTypes.string,
-  buttonContent: PropTypes.string,
-  buttonDisabled: PropTypes.bool,
+  buttonContent: PropTypes.string.isRequired,
+  buttonDisabled: PropTypes.bool.isRequired,
+  classNameButton: PropTypes.string,
   buttonDataTestid: PropTypes.string,
-}.isRequired;
+};
+
+GenericButton.defaultProps = {
+  classNameButton: '',
+  buttonDataTestid: '',
+};
 
 export default GenericButton;

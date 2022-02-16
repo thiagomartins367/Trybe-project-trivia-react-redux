@@ -4,23 +4,40 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import QuestionCard from '../components/QuestionCard';
 import { fetchApiOfQuestions } from '../redux/actions';
+import GenericButton from '../components/GenericButton';
 
 class Questions extends Component {
   constructor() {
     super();
 
     this.state = {
-      currentQuestion: [1],
+      currentQuestion: 1,
+      nextButtonDisabled: true,
     };
   }
 
   componentDidMount() {
     const { fetchApiOfQuestionsRedux, tokenAPi } = this.props;
     fetchApiOfQuestionsRedux(tokenAPi);
+    localStorage.setItem('currentQuestion', 0);
+  }
+
+  goToNextQuestion = () => {
+    this.setState((prevState) => ({
+      currentQuestion: prevState.currentQuestion + 1,
+      nextButtonDisabled: true,
+    }));
+  }
+
+  enableAndDisableNextQuestionButton = () => {
+    const { nextButtonDisabled } = this.state;
+    if (nextButtonDisabled === true) {
+      this.setState({ nextButtonDisabled: false });
+    }
   }
 
   render() {
-    const { currentQuestion } = this.state;
+    const { currentQuestion, nextButtonDisabled } = this.state;
     const { questionsRedux } = this.props;
     return (
       <section>
@@ -28,17 +45,29 @@ class Questions extends Component {
         <Header />
         {
           questionsRedux.length > 0
-          && currentQuestion.map((element) => (
-            <QuestionCard
-              key={ questionsRedux[element - 1].question }
-              category={ questionsRedux[element - 1].category }
-              questionContent={ questionsRedux[element - 1].question }
-              correctAnswer={ questionsRedux[element - 1].correct_answer }
-              incorrectAnswers={ questionsRedux[element - 1].incorrect_answers }
+          && <QuestionCard
+              key={ questionsRedux[currentQuestion - 1].question }
+              category={ questionsRedux[currentQuestion - 1].category }
+              questionContent={ questionsRedux[currentQuestion - 1].question }
+              correctAnswer={ questionsRedux[currentQuestion - 1].correct_answer }
+              currentQuestion={ currentQuestion }
+              nextQuestionButton={ this.enableAndDisableNextQuestionButton }
+              incorrectAnswers={ questionsRedux[currentQuestion - 1].incorrect_answers }
               dataTestidCategory="question-category"
               dataTestidQuestion="question-text"
             />
-          ))
+        }
+        <hr />
+        <br />
+        {
+          nextButtonDisabled === false
+          ? <GenericButton
+            buttonContent="Próxima"
+            buttonDisabled={ nextButtonDisabled }
+            buttonDataTestid="btn-next"
+            onClickEvent={ this.goToNextQuestion }
+          />
+          : false
         }
       </section>
     );
@@ -57,11 +86,14 @@ const mapDispatchToProps = (dispatch) => ({
 Questions.propTypes = {
   fetchApiOfQuestionsRedux: PropTypes.func.isRequired,
   tokenAPi: PropTypes.string,
-  questionsRedux: PropTypes.arrayOf(PropTypes.string).isRequired,
+  questionsRedux: PropTypes.arrayOf(PropTypes.shape({
+    category: PropTypes.string,
+  })),
 };
 
 Questions.defaultProps = {
   tokenAPi: '',
+  questionsRedux: [],
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Questions);

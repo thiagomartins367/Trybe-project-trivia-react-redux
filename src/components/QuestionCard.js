@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import GenericButton from './GenericButton';
 
 class QuestionCard extends Component {
   render() {
@@ -8,25 +9,36 @@ class QuestionCard extends Component {
       questionContent,
       correctAnswer,
       incorrectAnswers,
+      currentQuestion,
+      nextQuestionButton,
       dataTestidCategory,
       dataTestidQuestion,
     } = this.props;
-    const RANDOM_LOGIC_NUMBER = 0.5;
+    const currentQuestionStorage = Number(localStorage.getItem('currentQuestion'));
+    let randomQuestions = [];
     const questionsList = [...incorrectAnswers, correctAnswer];
-    const indexsQuestionsList = [];
-    questionsList.forEach((element, index) => {
-      indexsQuestionsList.push(index);
-    });
-    const randomIndexs = indexsQuestionsList.sort(
-      () => Math.random() - RANDOM_LOGIC_NUMBER,
-    );
-    // console.log('randomIndexs: ', randomIndexs);
-    const randomQuestions = [];
-    randomIndexs.forEach((elementIndex) => {
-      randomQuestions.push(questionsList[elementIndex]);
-    });
-    // console.log('questionsList: ', questionsList);
-    // console.log('randomQuestions: ', randomQuestions);
+    if (currentQuestionStorage !== currentQuestion) {
+      const RANDOM_LOGIC_NUMBER = 0.5;
+      const indexsQuestionsList = [];
+      questionsList.forEach((element, index) => {
+        indexsQuestionsList.push(index);
+      });
+      const randomIndexs = indexsQuestionsList.sort(
+        () => Math.random() - RANDOM_LOGIC_NUMBER,
+      );
+      // console.log('randomIndexs: ', randomIndexs);
+      randomIndexs.forEach((elementIndex) => {
+        randomQuestions.push(questionsList[elementIndex]);
+      });
+      // console.log('questionsList: ', questionsList);
+      // console.log('randomQuestions: ', randomQuestions);
+      localStorage.setItem('currentQuestion', currentQuestion);
+      localStorage.setItem('randomQuestions', JSON.stringify(randomQuestions));
+    } else {
+      randomQuestions = JSON.parse(localStorage.getItem('randomQuestions'));
+      console.log('randomQuestions STORAGE: ', randomQuestions);
+    }
+    
     return (
       <section className="card-question">
         <section>
@@ -42,24 +54,21 @@ class QuestionCard extends Component {
         <section data-testid="answer-options" className="answer-optionss">
           {
             randomQuestions.map((element, index) => (
-              <button
+              <GenericButton
                 key={ element }
-                type="button"
-                className="answer"
-                data-testid={
+                buttonContent={ element }
+                buttonDisabled={ false }
+                buttonDataTestid={
                   element === correctAnswer
                     ? 'correct-answer'
                     : `wrong-answer-${index}`
                 }
-              >
-                {element}
-              </button>
+                classNameButton="answer"
+                onClickEvent={ nextQuestionButton }
+              />
             ))
           }
         </section>
-        <hr />
-        <br />
-        <button type="button">Próxima</button>
       </section>
     );
   }
