@@ -18,9 +18,9 @@ const playerAndQuestionsReducer = (state = INITIAL_STATE, action) => {
       ...state,
       player: {
         ...state.player,
-        name: action.player,
+        name: action.playerName,
+        gravatarEmail: action.playerEmail,
       },
-      players: action.players,
     };
   case GET_QUESTIONS:
     return {

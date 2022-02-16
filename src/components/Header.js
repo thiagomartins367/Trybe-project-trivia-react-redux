@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
-import { fetchApi } from '../redux/actions';
 
 class Header extends React.Component {
   constructor() {
@@ -13,16 +12,16 @@ class Header extends React.Component {
     };
   }
 
-  generateImage() {
+  componentDidMount() {
     const { playerEmail } = this.props;
+    // console.log('playerEmail: ', playerEmail);
     const HASH = md5(playerEmail).toString();
     this.setState({ hashState: HASH });
   }
 
   render() {
-    const { playerName, fetchApiRedux } = this.props;
+    const { playerName } = this.props;
     const { score, hashState } = this.state;
-    setInterval(() => fetchApiRedux(), 21600000);
     return (
       <header>
         <img
@@ -42,13 +41,13 @@ const mapStateToProps = (state) => ({
   playerEmail: state.playerAndQuestionsReducer.player.gravatarEmail,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchApiRedux: () => dispatch(fetchApi()),
-});
+// const mapDispatchToProps = (dispatch) => ({
+ 
+// });
 
 Header.propTypes = {
   playerName: PropTypes.string,
   playerEmail: PropTypes.string,
 }.isRequired;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, null)(Header);

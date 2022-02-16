@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Header from "../components/Header";
-import QuestionCard from "../components/QuestionCard";
-import { fetchApi, fetchApiOfQuestions } from "../redux/actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Header from '../components/Header';
+import QuestionCard from '../components/QuestionCard';
+import { fetchApiOfQuestions } from '../redux/actions';
 
 class Questions extends Component {
   constructor() {
@@ -14,8 +14,8 @@ class Questions extends Component {
   }
 
   componentDidMount() {
-    const { fetchAPIRedux } = this.props;
-    window.onload = fetchAPIRedux();
+    const { fetchApiOfQuestionsRedux, tokenAPi } = this.props;
+    fetchApiOfQuestionsRedux(tokenAPi);
   }
 
   render() {
@@ -50,7 +50,7 @@ const mapStateToProps = (stateRedux) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchAPIRedux: () => dispatch(fetchApi()),
+  fetchApiOfQuestionsRedux: (token) => dispatch(fetchApiOfQuestions(token)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Questions);

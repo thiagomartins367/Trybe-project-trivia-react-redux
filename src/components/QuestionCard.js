@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class QuestionCard extends Component {
   render() {
@@ -11,20 +11,18 @@ class QuestionCard extends Component {
       dataTestidQuestion,
     } = this.props;
     const questionsList = [...incorrectAnswers, correctAnswer];
-    const randomQuestions = [...incorrectAnswers, correctAnswer];
-    randomQuestions.sort();
-    // questionsList.forEach(() => {
-    //   const index = Number((Math.random() * 10).toFixed(0));
-    //   console.log('index: ', index);
-    //   const random = (questionsList.length - 1) - index;
-    //   console.log('random: ', random);
-    //   const randomizeIndex = index + random;
-    //   console.log('randomizeIndex: ', randomizeIndex);
-    //   randomQuestions.push(questionsList[randomizeIndex]);
-    //   questionsList.shift();
-    // });
-    console.log('questionsList: ', questionsList);
-    console.log('randomQuestions: ', randomQuestions);
+    const indexsQuestionsList = [];
+    questionsList.forEach((element, index) => {
+      indexsQuestionsList.push(index);
+    });
+    const randomIndexs = indexsQuestionsList.sort(() => Math.random() - 0.5);
+    // console.log('randomIndexs: ', randomIndexs);
+    const randomQuestions = [];
+    randomIndexs.forEach((elementIndex) => {
+      randomQuestions.push(questionsList[elementIndex]);
+    });
+    // console.log('questionsList: ', questionsList);
+    // console.log('randomQuestions: ', randomQuestions);
     return (
       <section className="card-question">
         <section>
@@ -37,7 +35,7 @@ class QuestionCard extends Component {
             </p>
           </div>
         </section>
-        <section data-testid="answer-options" className="answer-options">
+        <section data-testid="answer-options" className="answer-optionss">
           {
             randomQuestions.map((element, index) => (
               <button

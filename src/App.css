@@ -57,12 +57,13 @@
   background-color: rgb(189, 188, 188);
 }
 
-.answer-options {
-  display: flex;
+.answer-optionss {
+  display:grid;
   width: 10%;
-  flex-direction: column;
+  /* flex-direction: column; */
   background-color: red;
-  align-items: center;
+  /* align-items: center; */
+  /* line-break: normal; */
 }
 
 .answer {
