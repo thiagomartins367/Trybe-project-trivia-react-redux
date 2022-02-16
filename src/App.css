@@ -58,8 +58,8 @@
 }
 
 .answer-optionss {
-  display: grid;
   background-color: red;
+  display: grid;
   width: 10%;
 }
 
