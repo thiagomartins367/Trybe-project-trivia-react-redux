@@ -14,6 +14,9 @@ class Header extends React.Component {
   render() {
     const { playerName, playerEmail } = this.props;
     const { score } = this.state;
+    setInterval(() => {
+      this.setState({ score: localStorage.getItem(`${playerName} ${playerEmail}`) });
+    }, 3000);
     // console.log('playerEmail: ', playerEmail);
     const hashEmail = md5(playerEmail).toString();
     return (
@@ -33,6 +36,7 @@ class Header extends React.Component {
 const mapStateToProps = (state) => ({
   playerName: state.playerAndQuestionsReducer.player.name,
   playerEmail: state.playerAndQuestionsReducer.player.gravatarEmail,
+  scoreRedux: state.playerAndQuestionsReducer.player.score,
 });
 
 // const mapDispatchToProps = (dispatch) => ({

@@ -1,10 +1,10 @@
-import { GET_QUESTIONS, PLAYER_REDUCER } from '../actions';
+import { GET_QUESTIONS, PLAYER_REDUCER, SAVE_POINTS } from '../actions';
 
 const INITIAL_STATE = {
   player: {
     name: '',
     assertions: '',
-    score: '',
+    score: 0,
     gravatarEmail: '',
   },
   questions: [],
@@ -27,6 +27,15 @@ const playerAndQuestionsReducer = (state = INITIAL_STATE, action) => {
       ...state,
       questions: action.questions,
     };
+  case SAVE_POINTS:
+    return {
+      ...state,
+      player: {
+        ...state.player,
+        score: action.payload + state.player.score,
+      },
+    };
+
   default:
     return state;
   }

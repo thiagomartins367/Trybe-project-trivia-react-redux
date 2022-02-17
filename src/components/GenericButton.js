@@ -9,9 +9,11 @@ class GenericButton extends Component {
       classNameButton,
       buttonDataTestid,
       onClickEvent,
+      nameBtn,
     } = this.props;
     return (
       <button
+        name={ nameBtn }
         type="button"
         disabled={ buttonDisabled }
         className={ classNameButton }
@@ -30,11 +32,13 @@ GenericButton.propTypes = {
   classNameButton: PropTypes.string,
   buttonDataTestid: PropTypes.string,
   onClickEvent: PropTypes.func,
+  nameBtn: PropTypes.string,
 };
 
 GenericButton.defaultProps = {
   classNameButton: '',
   buttonDataTestid: '',
+  nameBtn: '',
   onClickEvent: () => '',
 };
 

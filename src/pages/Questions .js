@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import QuestionCard from '../components/QuestionCard';
-import { fetchApiOfQuestions } from '../redux/actions';
+import { fetchApiOfQuestions, actionSavePoints } from '../redux/actions';
 import GenericButton from '../components/GenericButton';
 
 class Questions extends Component {
@@ -29,10 +29,41 @@ class Questions extends Component {
     }));
   }
 
-  enableAndDisableNextQuestionButton = () => {
+  enableAndDisableNextQuestionButton = ({ target }) => {
+    const { name } = target;
     const { nextButtonDisabled } = this.state;
     if (nextButtonDisabled === true) {
       this.setState({ nextButtonDisabled: false });
+    }
+    this.handleChange(name);
+  }
+
+  handleChange(name) {
+    const { currentQuestion } = this.state;
+    const { questionsRedux, dispatchSavePoints, playerName, playerEmail } = this.props;
+    const question = questionsRedux[currentQuestion - 1];
+    console.log(question);
+    console.log(questionsRedux);
+    console.log(currentQuestion);
+    const { difficulty } = question;
+    const THREE = 3;
+    const TWO = 2;
+    const ONE = 1;
+    const TEEN = 10;
+
+    if (name === 'correct-answer') {
+      let dificultyPoints = 0;
+      if (difficulty === 'hard') {
+        dificultyPoints = THREE;
+      } else if (difficulty === 'medium') {
+        dificultyPoints = TWO;
+      } else if (difficulty === 'easy') {
+        dificultyPoints = ONE;
+      }
+      const points = TEEN + (1 * dificultyPoints);
+      dispatchSavePoints(points);
+      localStorage.setItem(`${playerName} ${playerEmail}`, points);
+      // console.log('chamou: IF');
     }
   }
 
@@ -78,10 +109,13 @@ class Questions extends Component {
 const mapStateToProps = (stateRedux) => ({
   tokenAPi: stateRedux.token,
   questionsRedux: stateRedux.playerAndQuestionsReducer.questions,
+  playerName: stateRedux.playerAndQuestionsReducer.player.name,
+  playerEmail: stateRedux.playerAndQuestionsReducer.player.gravatarEmail,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchApiOfQuestionsRedux: (token) => dispatch(fetchApiOfQuestions(token)),
+  dispatchSavePoints: (points) => dispatch(actionSavePoints(points)),
 });
 
 Questions.propTypes = {
