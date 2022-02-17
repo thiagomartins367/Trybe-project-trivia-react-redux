@@ -9,7 +9,6 @@ class GenericButton extends Component {
       classNameButton,
       buttonDataTestid,
       onClickEvent,
-      nameBtn,
     } = this.props;
     return (
       <button

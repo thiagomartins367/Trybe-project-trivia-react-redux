@@ -25,32 +25,32 @@ class Questions extends Component {
     this.decreaseCounter();
   }
 
+  
+  stopCounter = () => {
+    const { countdown } = this.state;
+    if (countdown === 0) {
+      console.log('IntervalStopped');
+      clearInterval(this.decreaseCounter)
+    }
+  }
+
+  componentDidUpdate() {
+    this.stopCounter()
+  }
+
   decreaseCounter = () => {
     setInterval(() => {
-     const { countdown } = this.state;
-
-     if (countdown > 0) {
-     this.setState((prevState) => ({ countdown: prevState.countdown - 1 }));
-     } else {
-       this.setState({
-         timeOver: true,
-         nextButtonDisabled: false,
+      const { countdown } = this.state;
+      if (countdown > 0) {
+      this.setState((prevState) => ({ countdown: prevState.countdown - 1 }));
+      } else {
+        this.setState({
+          timeOver: true,
+          nextButtonDisabled: false,
       });
      }
-   }, 1000)
- }
-
- stopCounter = () => {
-   const { countdown } = this.state;
-   if (countdown === 0) {
-     console.log('IntervalStopped');
-     clearInterval(this.decreaseCounter)
-   }
- }
-
- componentDidUpdate() {
-   this.stopCounter()
- }
+   }, 1000);
+  }
 
   goToNextQuestion = () => {
     this.setState((prevState) => ({
