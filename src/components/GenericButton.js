@@ -29,11 +29,13 @@ GenericButton.propTypes = {
   buttonDisabled: PropTypes.bool.isRequired,
   classNameButton: PropTypes.string,
   buttonDataTestid: PropTypes.string,
+  onClickEvent: PropTypes.func,
 };
 
 GenericButton.defaultProps = {
   classNameButton: '',
   buttonDataTestid: '',
+  onClickEvent: () => '',
 };
 
 export default GenericButton;

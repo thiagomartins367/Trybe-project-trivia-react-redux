@@ -43,32 +43,33 @@ class Questions extends Component {
       <section>
         <h1>Tela de Jogo</h1>
         <Header />
-        {
-          questionsRedux.length > 0
-          && <QuestionCard
-              key={ questionsRedux[currentQuestion - 1].question }
-              category={ questionsRedux[currentQuestion - 1].category }
-              questionContent={ questionsRedux[currentQuestion - 1].question }
-              correctAnswer={ questionsRedux[currentQuestion - 1].correct_answer }
-              currentQuestion={ currentQuestion }
-              nextQuestionButton={ this.enableAndDisableNextQuestionButton }
-              incorrectAnswers={ questionsRedux[currentQuestion - 1].incorrect_answers }
-              dataTestidCategory="question-category"
-              dataTestidQuestion="question-text"
-            />
-        }
+        {questionsRedux.length > 0 && (
+          <QuestionCard
+            key={ questionsRedux[currentQuestion - 1].question }
+            category={ questionsRedux[currentQuestion - 1].category }
+            questionContent={ questionsRedux[currentQuestion - 1].question }
+            correctAnswer={ questionsRedux[currentQuestion - 1].correct_answer }
+            currentQuestion={ currentQuestion }
+            nextQuestionButton={ this.enableAndDisableNextQuestionButton }
+            incorrectAnswers={
+              questionsRedux[currentQuestion - 1].incorrect_answers
+            }
+            dataTestidCategory="question-category"
+            dataTestidQuestion="question-text"
+          />
+        )}
         <hr />
         <br />
-        {
-          nextButtonDisabled === false
-          ? <GenericButton
+        {nextButtonDisabled === false ? (
+          <GenericButton
             buttonContent="Próxima"
             buttonDisabled={ nextButtonDisabled }
             buttonDataTestid="btn-next"
             onClickEvent={ this.goToNextQuestion }
           />
-          : false
-        }
+        ) : (
+          false
+        )}
       </section>
     );
   }
@@ -88,6 +89,9 @@ Questions.propTypes = {
   tokenAPi: PropTypes.string,
   questionsRedux: PropTypes.arrayOf(PropTypes.shape({
     category: PropTypes.string,
+    question: PropTypes.string,
+    correct_answer: PropTypes.string,
+    incorrect_answers: PropTypes.arrayOf(PropTypes.string),
   })),
 };
 
