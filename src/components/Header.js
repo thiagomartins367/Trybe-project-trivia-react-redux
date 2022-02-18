@@ -4,22 +4,6 @@ import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
 
 class Header extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     score: 0,
-  //   };
-  // }
-
-  // componentDidUpdate() {
-  //   const { scorePlayerRedux } = this.props;
-  //   if (scorePlayerRedux > 0 && localStorage.getItem('updatedPlayerScore') === 'false') {
-  //     this.setState({ score: scorePlayerRedux }, () => {
-  //       localStorage.setItem('updatedPlayerScore', 'true');
-  //     });
-  //   }
-  // }
-
   render() {
     const { playerName, playerEmail, scorePlayerRedux } = this.props;
     const hashEmail = md5(playerEmail).toString();

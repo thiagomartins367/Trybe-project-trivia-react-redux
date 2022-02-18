@@ -56,11 +56,6 @@ class QuestionCard extends Component {
           {
             randomQuestions.map((element, index) => (
               <GenericButton
-                nameBtn={
-                  element === correctAnswer
-                    ? 'correct-answer'
-                    : `wrong-answer-${index}`
-                }
                 key={ element }
                 nameBtn={
                   element === correctAnswer
