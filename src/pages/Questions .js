@@ -148,7 +148,7 @@ class Questions extends Component {
 
 const mapStateToProps = (stateRedux) => ({
   tokenAPi: stateRedux.token,
-  questionsRedux: stateRedux.playerAndQuestionsReducer.questions,
+  questionsRedux: stateRedux.questionsReducer.questions,
   playerName: stateRedux.player.name,
   playerEmail: stateRedux.player.gravatarEmail,
 });

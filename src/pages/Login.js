@@ -83,10 +83,7 @@ class Login extends Component {
             buttonContent="Play"
             buttonDisabled={ disabledButton }
             buttonDataTestid="btn-play"
-            onClickEvent={ () => {
-              // fetchAPIRedux();
-              playerActionRedux(playerName, playerEmail);
-            } }
+            onClickEvent={ () => playerActionRedux(playerName, playerEmail) }
           />
         </Link>
         <GenericButton
