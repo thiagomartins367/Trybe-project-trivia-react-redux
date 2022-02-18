@@ -26,7 +26,8 @@ const mapStateToProps = (stateRedux) => ({
 });
 
 Feedback.propTypes = {
-  assertionsRedux: PropTypes.number.isRequired,
-};
+  assertionsRedux: PropTypes.number,
+  scorePlayerRedux: PropTypes.string,
+}.isRequired;
 
 export default connect(mapStateToProps, null)(Feedback);
