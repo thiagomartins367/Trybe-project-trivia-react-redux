@@ -1,10 +1,10 @@
-import { GET_QUESTIONS, PLAYER_REDUCER } from '../actions';
+import { GET_QUESTIONS } from '../actions';
 
 const INITIAL_STATE = {
   player: {
     name: '',
     assertions: '',
-    score: '',
+    score: 0,
     gravatarEmail: '',
   },
   questions: [],
@@ -13,20 +13,29 @@ const INITIAL_STATE = {
 
 const playerAndQuestionsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case PLAYER_REDUCER:
-    return {
-      ...state,
-      player: {
-        ...state.player,
-        name: action.playerName,
-        gravatarEmail: action.playerEmail,
-      },
-    };
+  // case PLAYER_REDUCER:
+  //   return {
+  //     ...state,
+  //     player: {
+  //       ...state.player,
+  //       name: action.playerName,
+  //       gravatarEmail: action.playerEmail,
+  //     },
+  //   };
   case GET_QUESTIONS:
     return {
       ...state,
       questions: action.questions,
     };
+    // case SAVE_POINTS:
+    //   return {
+    //     ...state,
+    //     player: {
+    //       ...state.player,
+    //       score: action.payload + state.player.score,
+    //     },
+    //   };
+
   default:
     return state;
   }

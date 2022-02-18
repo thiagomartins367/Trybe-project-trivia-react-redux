@@ -4,17 +4,24 @@ import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
 
 class Header extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      score: 0,
-    };
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     score: 0,
+  //   };
+  // }
+
+  // componentDidUpdate() {
+  //   const { scorePlayerRedux } = this.props;
+  //   if (scorePlayerRedux > 0 && localStorage.getItem('updatedPlayerScore') === 'false') {
+  //     this.setState({ score: scorePlayerRedux }, () => {
+  //       localStorage.setItem('updatedPlayerScore', 'true');
+  //     });
+  //   }
+  // }
 
   render() {
-    const { playerName, playerEmail } = this.props;
-    const { score } = this.state;
-    // console.log('playerEmail: ', playerEmail);
+    const { playerName, playerEmail, scorePlayerRedux } = this.props;
     const hashEmail = md5(playerEmail).toString();
     return (
       <header>
@@ -24,15 +31,16 @@ class Header extends React.Component {
           alt={ playerName }
         />
         <h3 data-testid="header-player-name">{ playerName }</h3>
-        <h4 data-testid="header-score">{ score }</h4>
+        <h4 data-testid="header-score">{ scorePlayerRedux }</h4>
       </header>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  playerName: state.playerAndQuestionsReducer.player.name,
-  playerEmail: state.playerAndQuestionsReducer.player.gravatarEmail,
+  playerName: state.player.name,
+  playerEmail: state.player.gravatarEmail,
+  scorePlayerRedux: state.player.score,
 });
 
 // const mapDispatchToProps = (dispatch) => ({

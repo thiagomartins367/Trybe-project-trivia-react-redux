@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import QuestionCard from '../components/QuestionCard';
-import { fetchApiOfQuestions } from '../redux/actions';
+import { fetchApiOfQuestions, savePlayerPoints } from '../redux/actions';
 import GenericButton from '../components/GenericButton';
 
 class Questions extends Component {
@@ -61,10 +61,47 @@ class Questions extends Component {
     }));
   }
 
-  enableAndDisableNextQuestionButton = () => {
+  enableAndDisableNextQuestionButton = ({ target }) => {
+    const { name } = target;
     const { nextButtonDisabled } = this.state;
     if (nextButtonDisabled === true) {
       this.setState({ nextButtonDisabled: false });
+    }
+    this.handleChange(name);
+  }
+
+  handleChange(name) {
+    const { currentQuestion } = this.state;
+    const {
+      questionsRedux,
+      savePlayerPointsRedux,
+      playerName,
+      playerEmail,
+    } = this.props;
+    const question = questionsRedux[currentQuestion - 1];
+    // console.log('question: ', question);
+    // console.log('questionsRedux: ', questionsRedux);
+    // console.log('currentQuestion: ', currentQuestion);
+    const { difficulty } = question;
+    const THREE = 3;
+    const TWO = 2;
+    const ONE = 1;
+    const TEEN = 10;
+
+    if (name === 'correct-answer') {
+      let dificultyPoints = 0;
+      if (difficulty === 'hard') {
+        dificultyPoints = THREE;
+      } else if (difficulty === 'medium') {
+        dificultyPoints = TWO;
+      } else if (difficulty === 'easy') {
+        dificultyPoints = ONE;
+      }
+      const points = TEEN + (1 * dificultyPoints);
+      savePlayerPointsRedux(points);
+      localStorage.setItem('updatedPlayerScore', 'false');
+      localStorage.setItem(`${playerName} ${playerEmail}`, points);
+      // console.log('chamou: IF');
     }
   }
 
@@ -112,10 +149,13 @@ class Questions extends Component {
 const mapStateToProps = (stateRedux) => ({
   tokenAPi: stateRedux.token,
   questionsRedux: stateRedux.playerAndQuestionsReducer.questions,
+  playerName: stateRedux.player.name,
+  playerEmail: stateRedux.player.gravatarEmail,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchApiOfQuestionsRedux: (token) => dispatch(fetchApiOfQuestions(token)),
+  savePlayerPointsRedux: (points) => dispatch(savePlayerPoints(points)),
 });
 
 Questions.propTypes = {
@@ -123,10 +163,14 @@ Questions.propTypes = {
   tokenAPi: PropTypes.string,
   questionsRedux: PropTypes.arrayOf(PropTypes.shape({
     category: PropTypes.string,
+    difficulty: PropTypes.string,
     question: PropTypes.string,
     correct_answer: PropTypes.string,
     incorrect_answers: PropTypes.arrayOf(PropTypes.string),
   })),
+  savePlayerPointsRedux: PropTypes.func.isRequired,
+  playerName: PropTypes.string.isRequired,
+  playerEmail: PropTypes.string.isRequired,
 };
 
 Questions.defaultProps = {
