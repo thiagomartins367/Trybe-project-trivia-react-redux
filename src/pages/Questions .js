@@ -37,10 +37,10 @@ class Questions extends Component {
   }
 
   stopCounter = () => {
-    const { countdown, nextButtonDisabled } = this.state;
-    if (countdown === 0 || nextButtonDisabled === false) {
+    const { timeOver, nextButtonDisabled } = this.state;
+    if (timeOver === true || nextButtonDisabled === false) {
       clearInterval(this.decrease);
-      console.log('Interval Stopped');
+      // console.log('Interval Stopped');
     }
   }
 
@@ -84,7 +84,7 @@ class Questions extends Component {
   }
 
   checkAnswer(name) {
-    const { currentQuestion } = this.state;
+    const { currentQuestion, countdown } = this.state;
     const {
       questionsRedux,
       savePlayerPointsRedux,
@@ -112,7 +112,7 @@ class Questions extends Component {
       } else if (difficulty === 'easy') {
         dificultyPoints = ONE;
       }
-      const points = TEEN + (1 * dificultyPoints);
+      const points = TEEN + (countdown * dificultyPoints);
       savePlayerPointsRedux(points);
       localStorage.setItem('updatedPlayerScore', 'false');
       localStorage.setItem(`${playerName} ${playerEmail}`, points);
