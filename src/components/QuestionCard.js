@@ -13,6 +13,7 @@ class QuestionCard extends Component {
       nextQuestionButton,
       dataTestidCategory,
       dataTestidQuestion,
+      disableAlternatives,
     } = this.props;
     const currentQuestionStorage = Number(localStorage.getItem('currentQuestion'));
     let randomQuestions = [];
@@ -56,8 +57,13 @@ class QuestionCard extends Component {
             randomQuestions.map((element, index) => (
               <GenericButton
                 key={ element }
+                nameBtn={
+                  element === correctAnswer
+                    ? 'correct-answer'
+                    : `wrong-answer-${index}`
+                }
                 buttonContent={ element }
-                buttonDisabled={ false }
+                buttonDisabled={ disableAlternatives }
                 buttonDataTestid={
                   element === correctAnswer
                     ? 'correct-answer'
@@ -81,6 +87,7 @@ QuestionCard.propTypes = {
   incorrectAnswers: PropTypes.arrayOf(PropTypes.string),
   dataTestidCategory: PropTypes.string,
   dataTestidQuestion: PropTypes.string,
+  disableAlternatives: PropTypes.bool,
 }.isRequired;
 
 export default QuestionCard;

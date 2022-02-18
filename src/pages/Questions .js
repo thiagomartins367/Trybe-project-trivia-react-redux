@@ -13,6 +13,8 @@ class Questions extends Component {
     this.state = {
       currentQuestion: 1,
       nextButtonDisabled: true,
+      countdown: 30,
+      timeOver: false,
     };
   }
 
@@ -20,12 +22,42 @@ class Questions extends Component {
     const { fetchApiOfQuestionsRedux, tokenAPi } = this.props;
     fetchApiOfQuestionsRedux(tokenAPi);
     localStorage.setItem('currentQuestion', 0);
+    this.decreaseCounter();
+  }
+
+  componentDidUpdate() {
+    this.stopCounter();
+  }
+
+  stopCounter = () => {
+    const { countdown } = this.state;
+    if (countdown === 0) {
+      console.log('IntervalStopped');
+      clearInterval(this.decreaseCounter);
+    }
+  }
+
+  decreaseCounter = () => {
+    const interval = 1000;
+    setInterval(() => {
+      const { countdown } = this.state;
+      if (countdown > 0) {
+        this.setState((prevState) => ({ countdown: prevState.countdown - 1 }));
+      } else {
+        this.setState({
+          timeOver: true,
+          nextButtonDisabled: false,
+        });
+      }
+    }, interval);
   }
 
   goToNextQuestion = () => {
     this.setState((prevState) => ({
       currentQuestion: prevState.currentQuestion + 1,
       nextButtonDisabled: true,
+      countdown: 30,
+      timeOver: false,
     }));
   }
 
@@ -37,12 +69,13 @@ class Questions extends Component {
   }
 
   render() {
-    const { currentQuestion, nextButtonDisabled } = this.state;
+    const { currentQuestion, nextButtonDisabled, countdown, timeOver } = this.state;
     const { questionsRedux } = this.props;
     return (
       <section>
         <h1>Tela de Jogo</h1>
         <Header />
+        <h3>{countdown}</h3>
         {questionsRedux.length > 0 && (
           <QuestionCard
             key={ questionsRedux[currentQuestion - 1].question }
@@ -56,6 +89,7 @@ class Questions extends Component {
             }
             dataTestidCategory="question-category"
             dataTestidQuestion="question-text"
+            disableAlternatives={ timeOver }
           />
         )}
         <hr />
