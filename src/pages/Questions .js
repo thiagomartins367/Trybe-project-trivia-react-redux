@@ -30,16 +30,16 @@ class Questions extends Component {
   }
 
   stopCounter = () => {
-    const { countdown } = this.state;
-    if (countdown === 0) {
-      console.log('IntervalStopped');
-      clearInterval(this.decreaseCounter);
+    const { countdown, nextButtonDisabled } = this.state;
+    if (countdown === 0 || nextButtonDisabled === false) {
+      clearInterval(this.decrease);
+      console.log('Interval Stopped');
     }
   }
 
   decreaseCounter = () => {
     const interval = 1000;
-    setInterval(() => {
+    this.decrease = setInterval(() => {
       const { countdown } = this.state;
       if (countdown > 0) {
         this.setState((prevState) => ({ countdown: prevState.countdown - 1 }));
@@ -59,6 +59,7 @@ class Questions extends Component {
       countdown: 30,
       timeOver: false,
     }));
+    this.decreaseCounter();
   }
 
   enableAndDisableNextQuestionButton = ({ target }) => {
