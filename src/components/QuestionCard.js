@@ -37,7 +37,7 @@ class QuestionCard extends Component {
       localStorage.setItem('randomQuestions', JSON.stringify(randomQuestions));
     } else {
       randomQuestions = JSON.parse(localStorage.getItem('randomQuestions'));
-      console.log('randomQuestions STORAGE: ', randomQuestions);
+      // console.log('randomQuestions STORAGE: ', randomQuestions);
     }
 
     return (
