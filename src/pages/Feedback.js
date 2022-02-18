@@ -8,14 +8,22 @@ class Feedback extends React.Component {
     const { assertionsRedux, scorePlayerRedux } = this.props;
     const COMPARE_SCORE = 3;
     return (
-      <div>
+      <section>
         <Header />
         <p data-testid="feedback-text">
-          {assertionsRedux >= COMPARE_SCORE ? 'Well Done!' : 'Could be better...'}
+          { assertionsRedux >= COMPARE_SCORE ? 'Well Done!' : 'Could be better...' }
         </p>
-        <p data-testid="feedback-total-score">{scorePlayerRedux}</p>
-        <p data-testid="feedback-total-question">{assertionsRedux}</p>
-      </div>
+        <div>
+          <span>Você acertou</span>
+          <span data-testid="feedback-total-question">{ ` ${assertionsRedux} ` }</span>
+          <span>questões!</span>
+        </div>
+        <div>
+          <span>Um total de</span>
+          <span data-testid="feedback-total-score">{ ` ${scorePlayerRedux} ` }</span>
+          <span>pontos</span>
+        </div>
+      </section>
     );
   }
 }
