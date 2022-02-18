@@ -15,7 +15,8 @@ class Header extends React.Component {
           alt={ playerName }
         />
         <h3 data-testid="header-player-name">{ playerName }</h3>
-        <h4 data-testid="header-score">{ scorePlayerRedux }</h4>
+        <span>Pontos:</span>
+        <h4 data-testid="header-score" className="player-score">{ scorePlayerRedux }</h4>
       </header>
     );
   }

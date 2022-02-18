@@ -5,13 +5,13 @@ import Header from '../components/Header';
 
 class Feedback extends React.Component {
   render() {
-    const { score } = this.props;
+    const { assertionsRedux } = this.props;
     const COMPARE_SCORE = 3;
     return (
       <div>
         <Header />
         <p data-testid="feedback-text">
-          {score >= COMPARE_SCORE ? 'Well Done!' : 'Could be better...'}
+          {assertionsRedux >= COMPARE_SCORE ? 'Well Done!' : 'Could be better...'}
         </p>
       </div>
     );
@@ -19,11 +19,11 @@ class Feedback extends React.Component {
 }
 
 const mapStateToProps = (stateRedux) => ({
-  score: stateRedux.player.score,
+  assertionsRedux: stateRedux.player.assertions,
 });
 
 Feedback.propTypes = {
-  score: PropTypes.number,
-}.isRequired;
+  assertionsRedux: PropTypes.number.isRequired,
+};
 
 export default connect(mapStateToProps, null)(Feedback);
