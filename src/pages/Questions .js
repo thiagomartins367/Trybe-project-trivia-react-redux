@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 import QuestionCard from '../components/QuestionCard';
-import { fetchApiOfQuestions, savePlayerPoints } from '../redux/actions';
+import {
+  fetchApiOfQuestions,
+  savePlayerAssertions,
+  savePlayerPoints,
+} from '../redux/actions';
 import GenericButton from '../components/GenericButton';
+import Feedback from './Feedback';
 
 class Questions extends Component {
   constructor() {
@@ -12,6 +18,7 @@ class Questions extends Component {
 
     this.state = {
       currentQuestion: 1,
+      gameOver: false,
       nextButtonDisabled: true,
       countdown: 30,
       timeOver: false,
@@ -53,8 +60,13 @@ class Questions extends Component {
   }
 
   goToNextQuestion = () => {
+    const { currentQuestion } = this.state;
+    const MAXIMUM_QUESTIONS = 5;
     this.setState((prevState) => ({
-      currentQuestion: prevState.currentQuestion + 1,
+      currentQuestion: currentQuestion < MAXIMUM_QUESTIONS
+        ? prevState.currentQuestion + 1
+        : currentQuestion,
+      gameOver: currentQuestion + 1 === MAXIMUM_QUESTIONS + 1,
       nextButtonDisabled: true,
       countdown: 30,
       timeOver: false,
@@ -68,14 +80,15 @@ class Questions extends Component {
     if (nextButtonDisabled === true) {
       this.setState({ nextButtonDisabled: false });
     }
-    this.handleChange(name);
+    this.checkAnswer(name);
   }
 
-  handleChange(name) {
+  checkAnswer(name) {
     const { currentQuestion } = this.state;
     const {
       questionsRedux,
       savePlayerPointsRedux,
+      savePlayerAssertionsRedux,
       playerName,
       playerEmail,
     } = this.props;
@@ -91,6 +104,7 @@ class Questions extends Component {
 
     if (name === 'correct-answer') {
       let dificultyPoints = 0;
+      savePlayerAssertionsRedux(ONE);
       if (difficulty === 'hard') {
         dificultyPoints = THREE;
       } else if (difficulty === 'medium') {
@@ -107,10 +121,20 @@ class Questions extends Component {
   }
 
   render() {
-    const { currentQuestion, nextButtonDisabled, countdown, timeOver } = this.state;
+    const {
+      currentQuestion,
+      gameOver,
+      nextButtonDisabled,
+      countdown,
+      timeOver,
+    } = this.state;
     const { questionsRedux } = this.props;
     return (
       <section>
+        <BrowserRouter>
+          <Route path="/feedback" component={ Feedback } />
+        </BrowserRouter>
+        {gameOver === true && <Redirect to="/feedback" />}
         <h1>Tela de Jogo</h1>
         <Header />
         <h3>{countdown}</h3>
@@ -157,11 +181,12 @@ const mapStateToProps = (stateRedux) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchApiOfQuestionsRedux: (token) => dispatch(fetchApiOfQuestions(token)),
   savePlayerPointsRedux: (points) => dispatch(savePlayerPoints(points)),
+  savePlayerAssertionsRedux: (assertions) => dispatch(savePlayerAssertions(assertions)),
 });
 
 Questions.propTypes = {
   fetchApiOfQuestionsRedux: PropTypes.func.isRequired,
-  tokenAPi: PropTypes.string,
+  tokenAPi: PropTypes.string.isRequired,
   questionsRedux: PropTypes.arrayOf(PropTypes.shape({
     category: PropTypes.string,
     difficulty: PropTypes.string,
@@ -172,10 +197,10 @@ Questions.propTypes = {
   savePlayerPointsRedux: PropTypes.func.isRequired,
   playerName: PropTypes.string.isRequired,
   playerEmail: PropTypes.string.isRequired,
+  savePlayerAssertionsRedux: PropTypes.func.isRequired,
 };
 
 Questions.defaultProps = {
-  tokenAPi: '',
   questionsRedux: [],
 };
 

@@ -18,7 +18,6 @@ const questionsReducer = (state = INITIAL_STATE, action) => {
       ...state,
       questions: action.questions,
     };
-
   default:
     return state;
   }

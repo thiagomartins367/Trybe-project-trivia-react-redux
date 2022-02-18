@@ -2,10 +2,16 @@ export const PLAYER_REDUCER = 'PLAYER_REDUCER';
 export const GET_TOKEN = 'GET_TOKEN';
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const SAVE_POINTS = 'SAVE_POINTS';
+export const SAVE_PLAYER_ASSERTIONS = 'SAVE_PLAYER_ASSERTIONS';
 
 export const savePlayerPoints = (payload) => ({
   type: SAVE_POINTS,
   payload,
+});
+
+export const savePlayerAssertions = (playerAssertions) => ({
+  type: SAVE_PLAYER_ASSERTIONS,
+  playerAssertions,
 });
 
 export const playerAction = (playerName, playerEmail) => ({

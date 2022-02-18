@@ -1,8 +1,8 @@
-import { PLAYER_REDUCER, SAVE_POINTS } from '../actions';
+import { PLAYER_REDUCER, SAVE_PLAYER_ASSERTIONS, SAVE_POINTS } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
-  assertions: '',
+  assertions: 0,
   score: 0,
   gravatarEmail: '',
 };
@@ -20,7 +20,11 @@ const player = (state = INITIAL_STATE, action) => {
       ...state,
       score: action.payload + state.score,
     };
-
+  case SAVE_PLAYER_ASSERTIONS:
+    return {
+      ...state,
+      assertions: state.assertions + action.playerAssertions,
+    };
   default:
     return state;
   }
