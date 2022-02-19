@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import GenericButton from '../components/GenericButton';
 
 class Feedback extends React.Component {
   render() {
@@ -24,10 +25,20 @@ class Feedback extends React.Component {
           <span data-testid="feedback-total-score">{ ` ${scorePlayerRedux} ` }</span>
           <span>pontos</span>
         </div>
+        <Link to="/ranking">
+          <GenericButton
+            buttonContent="Ver Ranking"
+            buttonDisabled={ false }
+            buttonDataTestid="btn-ranking"
+          />
+        </Link>
+        <br />
         <Link to="/">
-          <button type="button" data-testid="btn-play-again">
-            Play Again
-          </button>
+          <GenericButton
+            buttonContent="Play Again"
+            buttonDisabled={ false }
+            buttonDataTestid="btn-play-again"
+          />
         </Link>
       </section>
     );
