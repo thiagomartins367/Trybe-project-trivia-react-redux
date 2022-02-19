@@ -6,6 +6,7 @@ import Feedback from './pages/Feedback';
 import './App.css';
 import logo from './trivia.png';
 import Questions from './pages/Questions ';
+import Ranking from './pages/Ranking';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/settings" component={ Settings } />
         <Route path="/questions" component={ Questions } />
         <Route path="/feedback" component={ Feedback } />
+        <Route path="/ranking" component={ Ranking } />
         <Route exact path="/">
           <Login />
           <header className="App-header">
