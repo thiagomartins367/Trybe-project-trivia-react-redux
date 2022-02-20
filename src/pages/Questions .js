@@ -61,7 +61,26 @@ class Questions extends Component {
 
   goToNextQuestion = () => {
     const { currentQuestion } = this.state;
+    const { playerName, playerEmail, playerScore } = this.props;
     const MAXIMUM_QUESTIONS = 5;
+    if (currentQuestion + 1 === MAXIMUM_QUESTIONS + 1) {
+      let playersRanking = [];
+      const playerObject = {
+        playerName,
+        playerEmail,
+        playerScore,
+      };
+      playersRanking = localStorage.getItem('playersRanking');
+      if (playersRanking !== null) {
+        playersRanking = JSON.parse(playersRanking);
+        playersRanking.push(playerObject);
+        localStorage.setItem('playersRanking', JSON.stringify(playersRanking));
+      } else {
+        playersRanking = [];
+        playersRanking.push(playerObject);
+        localStorage.setItem('playersRanking', JSON.stringify(playersRanking));
+      }
+    }
     this.setState((prevState) => ({
       currentQuestion: currentQuestion < MAXIMUM_QUESTIONS
         ? prevState.currentQuestion + 1
@@ -89,8 +108,6 @@ class Questions extends Component {
       questionsRedux,
       savePlayerPointsRedux,
       savePlayerAssertionsRedux,
-      playerName,
-      playerEmail,
     } = this.props;
     const question = questionsRedux[currentQuestion - 1];
     // console.log('question: ', question);
@@ -114,9 +131,6 @@ class Questions extends Component {
       }
       const points = TEEN + (countdown * dificultyPoints);
       savePlayerPointsRedux(points);
-      localStorage.setItem('updatedPlayerScore', 'false');
-      localStorage.setItem(`${playerName} ${playerEmail}`, points);
-      // console.log('chamou: IF');
     }
   }
 
@@ -176,6 +190,7 @@ const mapStateToProps = (stateRedux) => ({
   questionsRedux: stateRedux.questionsReducer.questions,
   playerName: stateRedux.player.name,
   playerEmail: stateRedux.player.gravatarEmail,
+  playerScore: stateRedux.player.score,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -197,6 +212,7 @@ Questions.propTypes = {
   savePlayerPointsRedux: PropTypes.func.isRequired,
   playerName: PropTypes.string.isRequired,
   playerEmail: PropTypes.string.isRequired,
+  playerScore: PropTypes.number.isRequired,
   savePlayerAssertionsRedux: PropTypes.func.isRequired,
 };
 
