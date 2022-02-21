@@ -22,6 +22,7 @@ class Questions extends Component {
       nextButtonDisabled: true,
       countdown: 30,
       timeOver: false,
+      disabledAlternatives: false,
     };
   }
 
@@ -40,8 +41,19 @@ class Questions extends Component {
     const { timeOver, nextButtonDisabled } = this.state;
     if (timeOver === true || nextButtonDisabled === false) {
       clearInterval(this.decrease);
-      // console.log('Interval Stopped');
+      console.log('Interval Stopped');
+      console.log('timeOver: ', timeOver);
+      console.log('nextButtonDisabled: ', nextButtonDisabled);
     }
+  }
+
+  changeColorOfAlternatives = () => {
+    const correctAnswerButton = document.querySelector('.correct-answer');
+    const wrongAnswerButton = document.querySelectorAll('.wrong-answer');
+    correctAnswerButton.style.border = '3px solid rgb(6, 240, 15)';
+    wrongAnswerButton.forEach((htmlElement) => {
+      htmlElement.style.border = '3px solid rgb(255, 0, 0)';
+    });
   }
 
   decreaseCounter = () => {
@@ -51,8 +63,10 @@ class Questions extends Component {
       if (countdown > 0) {
         this.setState((prevState) => ({ countdown: prevState.countdown - 1 }));
       } else {
+        this.changeColorOfAlternatives();
         this.setState({
           timeOver: true,
+          disabledAlternatives: true,
           nextButtonDisabled: false,
         });
       }
@@ -89,6 +103,7 @@ class Questions extends Component {
       nextButtonDisabled: true,
       countdown: 30,
       timeOver: false,
+      disabledAlternatives: false,
     }));
     this.decreaseCounter();
   }
@@ -99,6 +114,7 @@ class Questions extends Component {
     if (nextButtonDisabled === true) {
       this.setState({ nextButtonDisabled: false });
     }
+    this.setState({ disabledAlternatives: true });
     this.checkAnswer(name);
   }
 
@@ -132,6 +148,7 @@ class Questions extends Component {
       const points = TEEN + (countdown * dificultyPoints);
       savePlayerPointsRedux(points);
     }
+    this.changeColorOfAlternatives();
   }
 
   render() {
@@ -140,7 +157,7 @@ class Questions extends Component {
       gameOver,
       nextButtonDisabled,
       countdown,
-      timeOver,
+      disabledAlternatives,
     } = this.state;
     const { questionsRedux } = this.props;
     return (
@@ -165,7 +182,7 @@ class Questions extends Component {
             }
             dataTestidCategory="question-category"
             dataTestidQuestion="question-text"
-            disableAlternatives={ timeOver }
+            disableAlternatives={ disabledAlternatives }
           />
         )}
         <hr />
