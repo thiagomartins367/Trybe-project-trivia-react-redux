@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GenericButton from '../components/GenericButton';
 import LabelAndInput from '../components/LabelAndInput';
-import { fetchApiToken, playerAction } from '../redux/actions';
+import {
+  fetchApiToken,
+  playerAction,
+  resetLoggedUserInformations,
+} from '../redux/actions';
 import Settings from './Settings';
 
 class Login extends Component {
@@ -20,8 +24,9 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    const { fetchApiTokenRedux } = this.props;
+    const { fetchApiTokenRedux, clearUserInformations } = this.props;
     fetchApiTokenRedux();
+    clearUserInformations();
   }
 
   handleInput = ({ target }) => {
@@ -51,7 +56,9 @@ class Login extends Component {
       disabledButton,
       redirectToSettings,
     } = this.state;
-    const { playerActionRedux } = this.props;
+    const {
+      playerActionRedux,
+    } = this.props;
     return (
       <section>
         <BrowserRouter>
@@ -83,7 +90,9 @@ class Login extends Component {
             buttonContent="Play"
             buttonDisabled={ disabledButton }
             buttonDataTestid="btn-play"
-            onClickEvent={ () => playerActionRedux(playerName, playerEmail) }
+            onClickEvent={ () => {
+              playerActionRedux(playerName, playerEmail);
+            } }
           />
         </Link>
         <GenericButton
@@ -106,6 +115,7 @@ const mapDispatchToProps = (dispatch) => ({
   playerActionRedux: (playerName, playerEmail) => dispatch(
     playerAction(playerName, playerEmail),
   ),
+  clearUserInformations: () => dispatch(resetLoggedUserInformations()),
 });
 
 export default connect(null, mapDispatchToProps)(Login);

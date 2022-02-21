@@ -3,6 +3,7 @@ export const GET_TOKEN = 'GET_TOKEN';
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const SAVE_POINTS = 'SAVE_POINTS';
 export const SAVE_PLAYER_ASSERTIONS = 'SAVE_PLAYER_ASSERTIONS';
+export const CLEAR_USER_INFORMATIONS = 'CLEAR_USER_INFORMATIONS';
 
 export const savePlayerPoints = (payload) => ({
   type: SAVE_POINTS,
@@ -63,3 +64,7 @@ export const fetchApiOfQuestions = (token) => async (dispatch) => {
     console.log('ERROR REQUEST "fetchApiOfQuestions" :', error);
   }
 };
+
+export const resetLoggedUserInformations = () => ({
+  type: CLEAR_USER_INFORMATIONS,
+});
