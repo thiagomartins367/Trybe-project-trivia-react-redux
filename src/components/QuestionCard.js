@@ -54,25 +54,25 @@ class QuestionCard extends Component {
         </section>
         <section data-testid="answer-options" className="answer-optionss">
           {
-            randomQuestions.map((element, index) => (
-              <GenericButton
-                key={ element }
-                nameBtn={
-                  element === correctAnswer
-                    ? 'correct-answer'
-                    : `wrong-answer-${index}`
-                }
-                buttonContent={ element }
-                buttonDisabled={ disableAlternatives }
-                buttonDataTestid={
-                  element === correctAnswer
-                    ? 'correct-answer'
-                    : `wrong-answer-${index}`
-                }
-                classNameButton="answer"
-                onClickEvent={ nextQuestionButton }
-              />
-            ))
+            randomQuestions.map((element, index) => {
+              const checkAnswers = element === correctAnswer
+                ? 'correct-answer'
+                : `wrong-answer-${index}`;
+              const classNameAlternative = `answer ${
+                element === correctAnswer ? 'correct-answer' : 'wrong-answer'
+              }`;
+              return (
+                <GenericButton
+                  key={ element }
+                  nameBtn={ checkAnswers }
+                  buttonContent={ element }
+                  buttonDisabled={ disableAlternatives }
+                  buttonDataTestid={ checkAnswers }
+                  classNameButton={ classNameAlternative }
+                  onClickEvent={ nextQuestionButton }
+                />
+              );
+            })
           }
         </section>
       </section>
