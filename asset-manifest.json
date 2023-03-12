@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "./static/css/main.805c1169.css",
-    "main.js": "./static/js/main.f916db1b.js",
+    "main.js": "./static/js/main.9a765a5f.js",
     "static/media/trivia.png": "./static/media/trivia.7e9181d35c0b06d5abc0.png",
     "index.html": "./index.html",
     "main.805c1169.css.map": "./static/css/main.805c1169.css.map",
-    "main.f916db1b.js.map": "./static/js/main.f916db1b.js.map"
+    "main.9a765a5f.js.map": "./static/js/main.9a765a5f.js.map"
   },
   "entrypoints": [
     "static/css/main.805c1169.css",
-    "static/js/main.f916db1b.js"
+    "static/js/main.9a765a5f.js"
   ]
 }
