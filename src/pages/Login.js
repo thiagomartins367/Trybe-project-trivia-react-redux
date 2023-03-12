@@ -50,6 +50,7 @@ class Login extends Component {
   }
 
   render() {
+    console.log('Login Renderizado');
     const {
       playerEmail,
       playerName,
