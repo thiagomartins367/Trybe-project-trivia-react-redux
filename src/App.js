@@ -9,8 +9,9 @@ import Ranking from './pages/Ranking';
 import Questions from './pages/Questions ';
 
 export default function App() {
+  console.log('App renderizado');
   return (
-    <BrowserRouter basename={ process.env.PUBLIC_URL }>
+    <BrowserRouter>
       <Switch>
         <Route path="/settings" component={ Settings } />
         <Route path="/questions" component={ Questions } />
@@ -22,6 +23,9 @@ export default function App() {
             <img src={ logo } className="App-logo" alt="logo" />
             <p>SUA VEZ</p>
           </header>
+          {
+            console.log('hearder renderizado (path: /)')
+          }
         </Route>
       </Switch>
     </BrowserRouter>
