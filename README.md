@@ -6,7 +6,7 @@ O projeto tem por objetivo a avaliação e prática dos conhecimentos adquiridos
 
 :warning: Projeto desenvolvido em um squad de 5 pessoas.
 
-### ATENÇÃO: Para utilizar a aplicação acesse o link no canto direito em "About".
+### :star: [Acesse](https://thiagomartins367.github.io/Trybe-project-trivia-react-redux) a aplicação agora mesmo!
 
 ---
 
