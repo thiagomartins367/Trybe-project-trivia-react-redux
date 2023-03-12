@@ -21,7 +21,7 @@ export default function App() {
           <Login />
           <header className="App-header">
             <img src={ logo } className="App-logo" alt="logo" />
-            <p>SUA VEZ</p>
+            <p>SUA VEZt</p>
           </header>
           {
             console.log('hearder renderizado (path: /)')
