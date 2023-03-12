@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.805c1169.css",
-    "main.js": "/static/js/main.57ba152c.js",
-    "index.html": "/index.html",
-    "main.805c1169.css.map": "/static/css/main.805c1169.css.map",
-    "main.57ba152c.js.map": "/static/js/main.57ba152c.js.map"
+    "main.css": "/Trybe-project-trivia-react-redux/static/css/main.805c1169.css",
+    "main.js": "/Trybe-project-trivia-react-redux/static/js/main.095b1d0e.js",
+    "index.html": "/Trybe-project-trivia-react-redux/index.html",
+    "main.805c1169.css.map": "/Trybe-project-trivia-react-redux/static/css/main.805c1169.css.map",
+    "main.095b1d0e.js.map": "/Trybe-project-trivia-react-redux/static/js/main.095b1d0e.js.map"
   },
   "entrypoints": [
     "static/css/main.805c1169.css",
-    "static/js/main.57ba152c.js"
+    "static/js/main.095b1d0e.js"
   ]
 }
