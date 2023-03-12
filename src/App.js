@@ -5,8 +5,8 @@ import Settings from './pages/Settings';
 import Feedback from './pages/Feedback';
 import './App.css';
 import logo from './trivia.png';
-import Ranking from './pages/Ranking';
 import Questions from './pages/Questions ';
+import Ranking from './pages/Ranking';
 
 export default function App() {
   return (
