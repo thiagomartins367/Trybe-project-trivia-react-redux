@@ -4,7 +4,7 @@ Este projeto foi desenvolvido durante o período de Curso da Trybe 🚀
 
 O projeto tem por objetivo a avaliação e prática dos conhecimentos adquiridos na Trybe, visando o cumprimento do requisitos solicitados.
 
-:warning: Projeto desenvolvido em um squad de 5 pessoas.
+:warning: Projeto desenvolvido em um squad de 4 integrantes.
 
 ### :star: [Acesse](https://thiagomartins367.github.io/Trybe-project-trivia-react-redux) a aplicação agora mesmo!
 
