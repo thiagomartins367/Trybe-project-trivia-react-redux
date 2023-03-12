@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "https://thiagomartins367.github.io/Trybe-project-trivia-react-redux/static/css/main.805c1169.css",
-    "main.js": "https://thiagomartins367.github.io/Trybe-project-trivia-react-redux/static/js/main.d88faa34.js",
-    "static/media/trivia.png": "https://thiagomartins367.github.io/Trybe-project-trivia-react-redux/static/media/trivia.7e9181d35c0b06d5abc0.png",
-    "index.html": "https://thiagomartins367.github.io/Trybe-project-trivia-react-redux/index.html",
-    "main.805c1169.css.map": "https://thiagomartins367.github.io/Trybe-project-trivia-react-redux/static/css/main.805c1169.css.map",
-    "main.d88faa34.js.map": "https://thiagomartins367.github.io/Trybe-project-trivia-react-redux/static/js/main.d88faa34.js.map"
+    "main.css": "./static/css/main.805c1169.css",
+    "main.js": "./static/js/main.bb382c5b.js",
+    "static/media/trivia.png": "./static/media/trivia.7e9181d35c0b06d5abc0.png",
+    "index.html": "./index.html",
+    "main.805c1169.css.map": "./static/css/main.805c1169.css.map",
+    "main.bb382c5b.js.map": "./static/js/main.bb382c5b.js.map"
   },
   "entrypoints": [
     "static/css/main.805c1169.css",
-    "static/js/main.d88faa34.js"
+    "static/js/main.bb382c5b.js"
   ]
 }
